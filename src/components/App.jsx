@@ -1,16 +1,9 @@
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <>
+      <div>React homework template</div>
+    </>
   );
 };
+
+// Your API key: 29542171-d27caeadb94251ff2cc88b8a0
