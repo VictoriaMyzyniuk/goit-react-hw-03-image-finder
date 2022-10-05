@@ -3,7 +3,8 @@ import { Component } from 'react';
 import * as API from 'services/getimages';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 import { Button } from 'components/Button/Button';
-
+import { Loader } from 'components/Loader/Loader';
+import { Container, ErrorMessage, Message } from 'components/App.styled';
 export class App extends Component {
   state = {
     images: null,
@@ -26,6 +27,7 @@ export class App extends Component {
   onLoadMore = () => {
     this.setState(prevState => ({
       page: prevState.page + 1,
+      isLoading: true,
     }));
   };
 
@@ -58,29 +60,34 @@ export class App extends Component {
   };
 
   render() {
+    const { error, images, isLoading, total } = this.state;
     return (
-      <>
-        {this.state.isLoading && <div>Loading</div>}
-        {this.state.error && <p>ERROR</p>}
-
+      <Container>
         <Searchbar onSubmitProps={this.handleSubmitForm} />
-
-        {this.state.images && (
+        {isLoading && <Loader>Loading</Loader>}
+        {error && (
+          <ErrorMessage>An error has occurred, please, try again</ErrorMessage>
+        )}
+        {images && (
           <>
-            {this.state.images.length === 0 && <p>There are no pictures! </p>}
+            {images.length === 0 && (
+              <ErrorMessage>No pictures on this query! </ErrorMessage>
+            )}
 
-            <ImageGallery items={this.state.images} />
+            <ImageGallery items={images} />
 
-            {this.state.images.length > 0 &&
-              this.state.images.length !== this.state.total && (
-                <Button onLoadMore={this.onLoadMore} />
-              )}
+            {isLoading && <Loader>Loading</Loader>}
+            {images.length > 0 && images.length !== total && (
+              <Button onLoadMore={this.onLoadMore} />
+            )}
+            {isLoading && <Loader>Loading</Loader>}
 
-            {this.state.images.length === this.state.total &&
-              !!this.state.images.length && <p>We show you all pictures!</p>}
+            {images.length === total && !!images.length && (
+              <Message>We show you all pictures!</Message>
+            )}
           </>
         )}
-      </>
+      </Container>
     );
   }
 }

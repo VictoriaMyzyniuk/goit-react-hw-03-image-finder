@@ -1,9 +1,18 @@
-export const Modal = ({ tags, largeImageURL }) => {
+import { PropTypes } from 'prop-types';
+import { Overlay, ModalEl } from 'components/Modal/Modal.styled';
+
+export const Modal = ({ tags, largeImageURL, onBackdropClick }) => {
   return (
-    <div className="overlay">
-      <div className="modal">
+    <Overlay onClick={onBackdropClick}>
+      <ModalEl>
         <img src={largeImageURL} alt={tags} />
-      </div>
-    </div>
+      </ModalEl>
+    </Overlay>
   );
+};
+
+Modal.propTypes = {
+  tags: PropTypes.string.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+  onBackdropClick: PropTypes.func.isRequired,
 };

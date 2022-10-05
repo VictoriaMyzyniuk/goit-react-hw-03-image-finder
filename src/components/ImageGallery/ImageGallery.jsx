@@ -1,7 +1,9 @@
+import { PropTypes } from 'prop-types';
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
+import { ImageGalleryEl } from 'components/ImageGallery/ImageGallery.styled';
 export const ImageGallery = ({ items }) => {
   return (
-    <ul className="gallery">
+    <ImageGalleryEl>
       {items.map(({ id, webformatURL, tags, largeImageURL }) => {
         return (
           <ImageGalleryItem
@@ -12,6 +14,17 @@ export const ImageGallery = ({ items }) => {
           />
         );
       })}
-    </ul>
+    </ImageGalleryEl>
   );
+};
+
+ImageGallery.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+    })
+  ),
 };

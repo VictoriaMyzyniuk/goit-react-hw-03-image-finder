@@ -8,6 +8,7 @@ export const getImages = async (query, page) => {
   const BASE_URL = 'https://pixabay.com/api/';
 
   const KEY = '29542171-d27caeadb94251ff2cc88b8a0';
+
   // console.log('value', value);
 
   const response = await axios.get(

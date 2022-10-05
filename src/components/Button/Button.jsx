@@ -1,7 +1,18 @@
+import { PropTypes } from 'prop-types';
+import {
+  LoadMoreButton,
+  FlexWrapperButton,
+} from 'components/Button/Button.styled';
 export const Button = ({ onLoadMore }) => {
   return (
-    <button type="button" onClick={() => onLoadMore()}>
-      Load more
-    </button>
+    <FlexWrapperButton>
+      <LoadMoreButton type="button" onClick={() => onLoadMore()}>
+        Load more
+      </LoadMoreButton>
+    </FlexWrapperButton>
   );
+};
+
+Button.propTypes = {
+  onLoadMore: PropTypes.func.isRequired,
 };
